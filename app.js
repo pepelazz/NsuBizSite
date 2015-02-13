@@ -3,11 +3,30 @@ require('./util');
 
 require('./loader');
 
+require('./filters');
+
 require('./ng-app');
 
 
 
-},{"./loader":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/loader.coffee","./ng-app":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/ng-app.coffee","./util":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/loader.coffee":[function(require,module,exports){
+},{"./filters":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/filters.coffee","./loader":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/loader.coffee","./ng-app":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/ng-app.coffee","./util":"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/filters.coffee":[function(require,module,exports){
+var module;
+
+module = angular.module('filters', []);
+
+module.filter('points', (function() {
+  return (function(num) {
+    if (num === '') {
+      return 0;
+    } else {
+      return num;
+    }
+  });
+}));
+
+
+
+},{}],"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/loader.coffee":[function(require,module,exports){
 $(function() {
   $('#hideAll .loader').css({
     marginTop: window.innerHeight * 0.4
@@ -24,7 +43,7 @@ $(function() {
 },{}],"/Users/Trikster/static_sites/NsuBiz/_NsuBiz/src/javascript/ng-app.coffee":[function(require,module,exports){
 var module;
 
-module = angular.module('app', []);
+module = angular.module('app', ['filters']);
 
 module.controller('main', [
   '$scope', '$http', '$location', '$timeout', (function($scope, $http, $location, $timeout) {
@@ -32,16 +51,18 @@ module.controller('main', [
     spreadsheet = 'https://spreadsheets.google.com/feeds/list/1LjQN1-P3qRBzkn3v3QRtnEEhjWPANR5WTmkpuMkY0dQ/od6/public/values?alt=json';
     $scope.data = [];
     $http.get(spreadsheet).success(function(data) {
-      return console.log($scope.data = _.map(data.feed.entry, (function(item) {
+      data = _.map(data.feed.entry, (function(item) {
         var newItem;
         newItem = {
           title: item.gsx$stud.$t,
           avatar: item.gsx$avatar.$t,
-          task: item.gsx$task.$t,
-          points: item.gsx$points.$t
+          points: +item.gsx$points.$t + +item.gsx$task.$t
         };
         return newItem;
-      })));
+      }));
+      return $scope.data = _.sortBy(data, function(item) {
+        return item.points * -1;
+      });
     });
   })
 ]);

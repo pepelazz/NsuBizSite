@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Boblic";
+  src: url("./images/boblic/boblic.eot");
+  src: url("./images/boblic/boblic.eot?#iefix") format("embedded-opentype");
+  src: url("./images/boblic/boblic.woff") format("woff");
+  src: url("./images/boblic/boblic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 h1 {
   font-size: 4.25rem;
   line-height: 4.5rem;
@@ -82,10 +91,13 @@ html, body {
   background-color: white;
   font-size: 1.25rem;
   line-height: 1.59;
+  background: url("./images/173H.jpg") center center no-repeat fixed;
+  background-size: cover;
 }
 
 html {
   font-size: 100%;
+  font-family: "Boblic", sans-serif !important;
 }
 @media (max-width: 1240px) {
   html {
@@ -98,9 +110,10 @@ html {
   }
 }
 
-#score-table {
-  margin: 2rem;
+#main-area {
+  padding: 1rem 5%;
 }
+
 #score-table td {
   padding: 3px 5px;
 }
