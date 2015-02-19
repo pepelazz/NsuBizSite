@@ -125,6 +125,7 @@ html {
 }
 #score-table td:nth-child(1) {
   width: 5%;
+  padding-left: 2rem;
 }
 #score-table td:nth-child(2) {
   width: 10%;
@@ -136,7 +137,6 @@ html {
 }
 #score-table .group-first td {
   background: rgba(0, 128, 0, 0.3);
-  padding-left: 2rem;
 }
 #score-table .group-second td {
   background: rgba(0, 0, 255, 0.3);

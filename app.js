@@ -64,13 +64,13 @@ module.controller('main', [
         return item.points * -1;
       });
       return $scope.rowPosition = (function(index) {
-        if (index < 51) {
+        if (index < 50) {
           return 'group-first';
         }
-        if (index >= 51 && index <= 90) {
+        if (index >= 50 && index <= 89) {
           return 'group-second';
         }
-        if (index > 90) {
+        if (index > 89) {
           return 'group-third';
         }
       });
