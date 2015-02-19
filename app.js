@@ -60,8 +60,19 @@ module.controller('main', [
         };
         return newItem;
       }));
-      return $scope.data = _.sortBy(data, function(item) {
+      $scope.data = _.sortBy(data, function(item) {
         return item.points * -1;
+      });
+      return $scope.rowPosition = (function(index) {
+        if (index < 51) {
+          return 'group-first';
+        }
+        if (index >= 51 && index <= 90) {
+          return 'group-second';
+        }
+        if (index > 90) {
+          return 'group-third';
+        }
       });
     });
   })
